@@ -4,6 +4,9 @@
 #This is an interpreter for the esoteric programming language, LOLCODE#
 #######################################################################
 
+#NOTE: Dillon Mixed Data Spinner.py
+
+
 import os
 import platform
 
