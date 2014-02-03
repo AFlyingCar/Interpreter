@@ -14,8 +14,19 @@ def visible(line):
 			line = line.split('"')[1] #print string
 			return line
 		
+		elif "'" in line:
+			line = line.split("'")[1] #works for both forms of quotations
+			return line
+
 		elif line in lolvars: #print variable value
-			return lolvars[line]
+			if '"' in lolvars[line]:
+				return lolvars[line].strip('"')
+
+			elif "'" in lolvars[line]:
+				return lolvars[line].strip("'")
+
+			else:
+				return lolvars[line]
 
 		else:
 			print "NameError: name '" + line + "' is not defined." #raise NameError if variable is not defined
@@ -71,6 +82,69 @@ def argrun(args1, args2):
 		code = lolif["NO WAI"]
 		syntaxcheck(code)
 
+def biggerthan(arg1, arg2):
+	if arg1 > arg2:
+		return True
+	else:
+		return False
+
+def lesserthan(arg1, arg2):
+	if arg1 < arg2:
+		return True
+	else:
+		return False
+
+def bothsaem(args1, args2):
+	linecode = ''	
+	code = ''
+	line = 0
+
+	while code != 'KTHX':
+		code = raw_input("")
+		linecode += code + "\n"
+	
+	linecode = linecode.split("\n")
+	linecode.remove('')
+#	print linecode
+	
+	if 'YA RLY' in linecode:
+		if args1 in lolvars:
+			args1 = lolvars[args1]
+
+		if args2 in lolvars:
+			args2 = lolvars[args2]
+
+		if args1 == args2:
+#			print "equal"
+			line = linecode.index('YA RLY')
+
+			while linecode[line] != 'KTHX':
+				line += 1
+				if linecode[line] == 'NO WAI':
+					line += 2
+#					print 'wrong'
+				
+#				print line
+#				print linecode[line]
+				syntaxcheck(linecode[line])
+
+		elif args1 != args2:
+#			print "not equal"
+			line = linecode.index('NO WAI')
+
+			while linecode[line] != 'KTHX':
+				line += 1
+				if linecode[line] == 'NO WAI':
+					line += 1
+#					print 'correct'
+
+				syntaxcheck(linecode[line])
+	else:
+		if "YA RLY" not in linecode:
+			print "SyntaxError: Expected 'YA RLY' in <module> at line[1]"
+#		else:
+#			print "SyntaxError: Expected 'NO WAI' in <module> at line[1]"
+
 def syntaxcheck(code):
 	try:
 		if " ".join(code.split(" ", 3)[:3]) == "I HAS A":
@@ -123,9 +197,13 @@ def syntaxcheck(code):
 				print "SyntaxError: Unexpected line break"
 
 			else:
-				arg1 = code.split(" ")[2]
-				arg2 = code.split(" ")[4]
-				bothsaem(arg1, arg2)
+				if "ORLY?" in code:
+					arg1 = code.split(" ")[2]
+					arg2 = code.split(" ")[4]
+					bothsaem(arg1, arg2)
+					
+				else:
+					print "SyntaxError: Invalid Syntax. Expected 'ORLY?'"
 	
 		elif code.split(" ", 1)[0] == 'BTW':
 			pass
@@ -144,76 +222,13 @@ def syntaxcheck(code):
 #		print e
 		pass
 
-def biggerthan(arg1, arg2):
-	if arg1 > arg2:
-		return True
-	else:
-		return False
-
-def lesserthan(arg1, arg2):
-	if arg1 < arg2:
-		return True
-	else:
-		return False
-
-def bothsaem(args1, args2):
-	linecode = ''	
-	code = ''
-	line = 0
-
-	while code != 'KTHX':
-		code = raw_input("")
-		linecode += code + "\n"
-	
-	linecode = linecode.split("\n")
-	linecode.remove('')
-	print linecode
-	
-	if 'YA RLY' in linecode:
-		if args1 in lolvars:
-			args1 = lolvars[args1]
-
-		if args2 in lolvars:
-			args2 = lolvars[args2]
-
-		if args1 == args2:
-			print "equal"
-			line = linecode.index('YA RLY')
-
-			while linecode[line] != 'KTHX':
-				line += 1
-				if linecode[line] == 'NO WAI':
-					line += 2
-					print 'wrong'
-				
-				print line
-				print linecode[line]
-				syntaxcheck(linecode[line])
-
-		elif args1 != args2:
-			print "not equal"
-			line = linecode.index('NO WAI')
-
-			while linecode[line] != 'KTHX':
-				line += 1
-				if linecode[line] == 'NO WAI':
-					line += 1
-					print 'correct'
-
-				syntaxcheck(linecode[line])
-	else:
-		if "YA RLY" not in linecode:
-			print "SyntaxError: Expected 'YA RLY' in <module> at line[1]"
-#		else:
-#			print "SyntaxError: Expected 'NO WAI' in <module> at line[1]"
-
 lolkeyword = {'YEP':True, 'NOPE':False}
 lolsyntax = ["VISIBLE", "KTHXBYE", "GIMMEH", "BTW", "IZ", "I HAS A"]
 #lolerrors = {"IndentationError":"Indentation Error: Expected an indented block.", "SyntaxError": "Syntax Error: Invalid syntax."}
 lolvars = {}
 
 print "LOLCODE IDLE 1.0 on " + str(plat.system())
-print 'Type "copyright", "credits", or "license()" for more information'
+#print 'Type "copyright", "credits", or "license()" for more information'
 
 while True:
 	while True:
@@ -222,7 +237,7 @@ while True:
 		if code != "\n":
 			break
 
-	print " ".join(code.split(" ", 2)[:2])
+#	print " ".join(code.split(" ", 2)[:2])
 	syntaxcheck(code)
 
 	code = ''
