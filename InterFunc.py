@@ -1,3 +1,62 @@
+
+lolkeyword = {'YEP':True, 'NOPE':False}
+lolsyntax = ["VISIBLE", "KTHXBYE", "GIMMEH", "BTW", "IZ", "I HAS A"] #Not used. May be removed later.
+lolvars = {}
+
+#class checker:
+#	def yarly(self, linecode):
+#		if 'MEBBE' in linecode:
+#			linecode = linecode[:linecode.index('mebbe')-1]
+#		elif 'NO WAI' in linecode:
+#			linecode = [:linecode.index('NO WAI')-1]
+
+#		for item in linecode:
+#			if item == 'YA RLY':
+#				continue
+#			else:
+#				syntaxcheck(item)
+
+#	def nowai(self, linecode):
+#		linecode = linecode[linecode.index('NO WAI')-1]
+#		for item in linecode:
+#			if item == 'NO WAI':
+#				continue
+#			else:
+#				syntaxcheck(item)
+
+#	def iz(self, arg1, arg2 = None):
+#		linecode = ''
+#		line = 0
+#		if "ORLY?" in in code:
+#			while code != 'KTHX':
+#				code = raw_input("")
+#				linecode += code + '\n'
+
+#			linecode = linecode.split("\n")
+
+#			if arg2 == None:
+#				if arg:
+#					for item in linecode:
+#						if item == "YA RLY":
+#							continue
+#						elif item == "NO WAI":
+#							break
+#						elif item == "KTHX":
+#							break
+#						else:
+#							syntaxcheck(item)
+#				else:
+#					linecode = linecode[linecode.index("NO WAI"):]
+#					for item in linecode:
+#						if item == "KTHX":
+#							break
+
+#						syntaxcheck(item)
+
+#		else:
+#			print "SyntaxError. Expected ORLY? on line 1."
+
+
 def visible(line):
 	try:
 		if '"' in line:
@@ -34,145 +93,6 @@ def gimmeh(var, val):
 
 	except Exception as e:
 		print e
-
-def iz(args1, args2=None, args3=None, condition1=None):
-	linecode = ''
-	code = ''
-	line = 0
-
-	while code != 'KTHX':
-		code = raw_input("")
-		linecode += code + '\n'
-
-	linecode = linecode.split("\n")
-	linecode.remove('')
-
-#	else:
-#		if args1 in lolvars:
-#			args1 = lolvars[args1]
-#		if args2 in lolvars:
-#			args2 = lolvars[args2]
-#		if args3 in lolvars:
-#			args3 = lolvars[args3]
-
-	if 'YA RLY' in linecode:
-		line+=1
-
-		if args2 == None and args3 == None:
-			if lolkeyword[args1]:
-				while linecode[line] != "KTHX":
-					if linecode[line] == "NO WAI":
-						line += 1
-
-					syntaxcheck(linecode[line])
-					line += 1
-		else:
-			if condition1 == "BIGGER THAN":
-				if args3 == None:
-					if args1 > args2:
-						while linecode[line] != "KTHX":
-							if linecode[line] == "NO WAI":
-								line += 1
-	
-							syntaxcheck(linecode[line])
-							line +=1
-
-					else:
-						line = linecode.index("NO WAI")
-						while linecode[line] != "KTHX":
-							syntaxcheck(linecode[line])
-							line += 1
-
-				else:
-					if condition2 == "BIGGER THAN":
-						pass
-					elif condition2 == "LESSER THAN":
-						pass
-					else:
-						if args1 > args2 and args3:
-							while linecode[line] != "KTHX":
-								if linecode[line] == "NO WAI":
-									line += 1
-
-								syntaxcheck(linecode[line])
-								line += 1
-						
-						else:
-							line = linecode.index("NO WAI")
-							while linecode[line] != "KTHX":
-								syntaxcheck(linecode[line])
-								line += 1
-
-			elif condition1 == "LESSER THAN":
-				if args3 == None:
-					if args1 > args2:
-						while linecode[line] != "KTHX":
-							if linecode[line] == "NO WAI":
-								line += 1
-	
-							syntaxcheck(linecode[line])
-							line +=1
-
-					else:
-						line = linecode.index("NO WAI")
-						while linecode[line] != "KTHX":
-							syntaxcheck(linecode[line])
-							line += 1
-
-				else:
-					if condition2 == "BIGGER THAN":
-						pass
-					elif condition2 == "LESSER THAN":
-						pass
-					else:
-						if args1 > args2 and args3:
-							while linecode[line] != "KTHX":
-								if linecode[line] == "NO WAI":
-									line += 1
-
-								syntaxcheck(linecode[line])
-								line += 1
-						
-						else:
-							line = linecode.index("NO WAI")
-							while linecode[line] != "KTHX":
-								syntaxcheck(linecode[line])
-								line += 1
-	else:
-		print "SyntaxError: Expected 'YA RLY'"
-#	if arg1 == 'YEP':
-#		arg1 = lolkeyword[arg1]
-	
-#	elif arg1 == 'NOPE':
-#		arg1 = lolkeyword[arg1]
-
-#	else:
-#		if condition1 == "BIGGER THAN":
-#			if arg1 > arg2:
-#				syntaxcheck(code)
-
-#		elif condition1 == "LESSER THAN":
-#			if arg1 < arg2:
-#				syntaxcheck(code)
-
-	if 'YA RLY' in linecode:
-		if args1 in lolvars:
-			args1 = lolvars[args1]
-
-		if args2 in lolvars:
-			args2 = lolvars[args2]
-
-		if args1 == args2:
-#			print "equal"
-			line = linecode.index('YA RLY')
-
-			while linecode[line] != 'KTHX':
-				line += 1
-				if linecode[line] == 'NO WAI':
-					line += 2
-
-				syntaxcheck(linecode[line])
-
 
 def argrun(args1, args2):
 	if args1 == args2:
@@ -254,15 +174,17 @@ def syntaxcheck(code):
 			if vis == None:
 				vis = ''
 
-			print "\n" + vis
+			print ">" + vis
 
 		elif code.split(" ", 1)[0] == "KTHXBYE":
 			choice = raw_input("The program is still running! Do you want to kill it?(y/n) ")
 			if choice == "y":
 				sys.exit()
+				return True
 
 		elif code.split(" ", 1)[0] == "KTHXSYS":
 			sys.exit()
+			return True
 
 		elif code.split(" ", 1)[0] == "GIMMEH":
 			lolinput = raw_input(">")
@@ -277,29 +199,45 @@ def syntaxcheck(code):
 
 		elif code.split(" ", 1)[0] == 'IZ':
 			i =0
+			arg1 = None
+			arg2 = None
+			condition = None
 
-			for item in code.split(" ")[1:]:
-				if item == "BIGGER":
-					condition = item
-					code.remove(item)
-				elif item == "LESSER":
-					condition = item
-					code.remove(item)
-				elif item == "THAN":
-					code.remove(item)
-				else:
-					if item in lolvars:
-						if arg1 == None:
-							arg1 = lolvars[item]
-						elif arg2 == None:
-							arg2 = lolvars[item]
-						else:
-							pass
+			if "ORLY?" not in code.split(" ")[0]:
+				print "SyntaxError. Expected ORLY? at end of line."
 
+			else:
+				for item in code.split(" ")[1:]:
+					if item == "BIGGER":
+						condition = item
+						code.remove(item)
+					elif item == "LESSER":
+						condition = item
+						code.remove(item)
+					elif item == "THAN":
+						code.remove(item)
 					else:
-						pass
+						if item in lolvars:
+							if arg1 == None:
+								arg1 = lolvars[item]
+							elif arg2 == None:
+								arg2 = lolvars[item]
+							else:
+								continue
+						elif item in lolkeyword:
+							if arg1 == None:
+								arg1 = lolkeyword[item]
+							elif arg2 == None:
+								arg2 = lolkeyword[item]
+							else:
+								continue
 				
-			iz(code.split(" ")[1])
+				print condition
+				print arg1
+				print arg2
+				print code
+
+#				iz(code.split(" ")[1])
 
 		elif " ".join(code.split(" ", 2)[:2]) == 'BOTH SAEM':
 			if code == "BOTH SAEM\n":
@@ -320,6 +258,10 @@ def syntaxcheck(code):
 		elif code.split(" ", 1)[0] == 'OBTW':
 			while code != 'KTHX':
 				code = raw_input("")
+
+		elif " ".join(code.split(" ", 3)[:3]) == "I CAN HAS":
+			include = code.split(" ", 3)[3:][0]
+			import include
 
 		else:
 			print "NameError: name '" + code + "' is not defined"
